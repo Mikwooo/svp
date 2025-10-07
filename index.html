@@ -1,122 +1,408 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Pardon Zehra 💖</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
-      text-align: center;
-      color: #444;
-      overflow: hidden;
-    }
-    h1 {
-      color: #e75480;
-      margin-top: 50px;
-      font-size: 3em;
-      animation: pulse 2s infinite;
-    }
-    p {
-      font-size: 1.2em;
-      margin: 10px 0 30px;
-    }
-    .btn {
-      display: inline-block;
-      margin: 20px;
-      padding: 12px 24px;
-      background: #ff7f9f;
-      color: white;
-      text-decoration: none;
-      border-radius: 25px;
-      font-size: 18px;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background: #ff4f7a;
-    }
-    .gallery img {
-        max-width: 100%;
-        height: auto;
-      width: 120px;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      animation: fadeIn 2s ease-in-out;
-    }
-    .flowers, .fruits {
-      margin-top: 30px;
-      font-size: 40px;
-      animation: bloom 3s infinite
-      alternate;
-    }
-    h3 {
-      margin-top: 40px;
-      color: #b03060;
-      font-size: 2em;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUX 4 SAISONS - Primeur Fruits & Légumes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Animations */
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes bloom {
-      0% { transform: scale(0.8) rotate(0deg); }
-      100% { transform: scale(1.2) rotate(5deg); }
-    }
-    .heart {
-      position: fixed;
-      top: -10px;
-      font-size: 24px;
-      color: #ff4f7a;
-      animation: fall 5s linear forwards;
-      pointer-events: none;
-    }
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-    }
-  </style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            font-size: 1.5rem !important;
+            font-weight: 800 !important;
+            color: #ffd700 !important;
+            letter-spacing: 2px;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a7c2c" width="1200" height="600"/><circle cx="200" cy="150" r="80" fill="%23ff6b35" opacity="0.6"/><circle cx="400" cy="400" r="100" fill="%23f7931e" opacity="0.5"/><circle cx="800" cy="200" r="90" fill="%23c1272d" opacity="0.6"/><circle cx="1000" cy="450" r="70" fill="%23ffd700" opacity="0.5"/><ellipse cx="600" cy="300" rx="120" ry="80" fill="%23228b22" opacity="0.4"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255,107,53,0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,107,53,0.6);
+        }
+
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d5016;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #4a7c2c 0%, #6fa842 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s infinite;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            color: #2d5016;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: #666;
+        }
+
+        .season-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .about-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #555;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: scale(1.05);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            color: #2d5016;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2d5016 0%, #1a300d 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Pardon Zehra 💖</h1>
-  <p>Je suis désolé... j’aimerais me faire pardonner.</p>
-  <a href="lettre.html" class="btn">Clique ici 🌸</a>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="logo">AUX 4 SAISONS</a></li>
+            <li><a href="produits.html">Nos Produits</a></li>
+            <li><a href="apropos.html">Qui sommes-nous</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
-  <div id="surprises">
-    <h2>Pour toi 💕</h2>
-    <div class="gallery">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjY4NDdneXBxN2V4bTBsMThiZWtmeW5sb2tyd2Y3Y3EybjRmc2V4NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YZOsKxJfmvzG0/giphy.gif" class= "gif-chat" alt="chat svp">
-        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG96MTFyNTdhdXo5Nms3c2k3Ym81NHp3a2ZmYXgwcTV4Z3d0YTNnZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9uwnYUDw342pq/giphy.gif" class=""gif-chat" alt="chat svp2">
-        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGc5OTJmdmd5YTZhb2Uyd2IwaXJsZnpsc3gwaXpncnMwY2VyNTg0cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YavErWcDZCMHm/giphy.gif" class=""gif-chat" alt="chat svp3">
+    <div class="hero">
+        <div class="hero-content">
+            <h1>AUX 4 SAISONS</h1>
+            <p>Fruits & Légumes Frais toute l'année</p>
+            <a href="produits.html" class="cta-button">Découvrir nos produits</a>
+        </div>
     </div>
 
-    <div class="flowers">🌸🌹🌼🌺</div>
-    <div class="fruits">🍑 🥑</div>
+    <section class="section">
+        <h2>Produits du Moment</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🍎</div>
+                <div class="product-info">
+                    <h3>Pommes Fraîches</h3>
+                    <p>Croquantes et juteuses, directement du verger</p>
+                    <span class="season-badge">Automne</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🍅</div>
+                <div class="product-info">
+                    <h3>Tomates</h3>
+                    <p>Gorgées de soleil, parfaites pour vos salades</p>
+                    <span class="season-badge">Été</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🥕</div>
+                <div class="product-info">
+                    <h3>Carottes Bio</h3>
+                    <p>Sucrées et croquantes, cultivées localement</p>
+                    <span class="season-badge">Toute l'année</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🍊</div>
+                <div class="product-info">
+                    <h3>Oranges</h3>
+                    <p>Vitaminées et pleines de fraîcheur</p>
+                    <span class="season-badge">Hiver</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <h3>Je t’aime, Zehra ❤️</h3>
-  </div>
+    <section class="section about-section">
+        <h2>Nos Valeurs</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3>Fraîcheur</h3>
+                <p>Produits sélectionnés chaque jour pour leur qualité</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🚜</div>
+                <h3>Circuit Court</h3>
+                <p>Directement des producteurs locaux à votre assiette</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">♻️</div>
+                <h3>Respect de la Nature</h3>
+                <p>Produits de saison et agriculture raisonnée</p>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // Générer des cœurs qui tombent
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      document.body.appendChild(heart);
+    <footer>
+        <p>&copy; 2025 AUX 4 SAISONS - Tous droits réservés</p>
+    </footer>
 
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
-    }
-    setInterval(createHeart, 800);
-  </script>
+    <script>
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-card, .value-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Effet de parallaxe sur le hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Animation du logo
+        const logo = document.querySelector('.logo');
+        logo.addEventListener('mouseenter', () => {
+            logo.style.transform = 'scale(1.1)';
+            logo.style.transition = 'transform 0.3s ease';
+        });
+        logo.addEventListener('mouseleave', () => {
+            logo.style.transform = 'scale(1)';
+        });
+    </script>
 </body>
 </html>

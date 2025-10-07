@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Produits - AUX 4 SAISONS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            font-size: 1.5rem !important;
+            font-weight: 800 !important;
+            color: #ffd700 !important;
+            letter-spacing: 2px;
+        }
+
+        .header-space {
+            height: 80px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #4a7c2c 0%, #6fa842 100%);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .products-container {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-section {
+            margin-bottom: 5rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #4a7c2c;
+        }
+
+        .category-icon {
+            font-size: 3.5rem;
+        }
+
+        .category-title {
+            font-size: 2.5rem;
+            color: #2d5016;
+        }
+
+        .promo-badge {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .promo-label {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b35;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 10;
+            box-shadow: 0 3px 10px rgba(255, 107, 53, 0.4);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #4a7c2c 0%, #6fa842 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.8rem;
+            color: #2d5016;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ff6b35;
+        }
+
+        .old-price {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .product-origin {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: #e8f5e9;
+            color: #2d5016;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .recipe-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #4a7c2c 0%, #6fa842 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .recipe-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(74, 124, 44, 0.4);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2d5016 0%, #1a300d 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .category-header {
+                flex-direction: column;
+                align-items: start;
+            }
+            .category-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="logo">AUX 4 SAISONS</a></li>
+            <li><a href="produits.html">Nos Produits</a></li>
+            <li><a href="apropos.html">Qui sommes-nous</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="header-space"></div>
+
+    <div class="page-header">
+        <h1>Nos Fruits & Légumes</h1>
+        <p>Des produits frais et de qualité, sélectionnés chaque jour</p>
+    </div>
+
+    <div class="products-container">
+        
+        <!-- SECTION PROMOTIONS -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🔥</span>
+                <h2 class="category-title">Promotions de la Semaine</h2>
+                <span class="promo-badge">PROMOS</span>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="promo-label">-30%</div>
+                    <div class="product-image">🍎</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Pommes Golden</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div>
+                                <div class="product-price">1,40€/kg</div>
+                                <div class="old-price">2,00€/kg</div>
+                            </div>
+                        </div>
+                        <p class="product-description">Pommes croquantes et sucrées, parfaites pour croquer ou cuisiner</p>
+                        <a href="recettes.html?produit=pommes" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="promo-label">-25%</div>
+                    <div class="product-image">🍊</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Oranges</h3>
+                                <span class="product-origin">🇪🇸 Espagne</span>
+                            </div>
+                            <div>
+                                <div class="product-price">1,95€/kg</div>
+                                <div class="old-price">2,60€/kg</div>
+                            </div>
+                        </div>
+                        <p class="product-description">Juteuses et gorgées de vitamine C, idéales pour des jus frais</p>
+                        <a href="recettes.html?produit=oranges" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="promo-label">-20%</div>
+                    <div class="product-image">🥕</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Carottes Bio</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div>
+                                <div class="product-price">1,60€/kg</div>
+                                <div class="old-price">2,00€/kg</div>
+                            </div>
+                        </div>
+                        <p class="product-description">Carottes biologiques, sucrées et croquantes de nos producteurs</p>
+                        <a href="recettes.html?produit=carottes" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION PRODUITS DU MOMENT -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">⭐</span>
+                <h2 class="category-title">Produits du Moment</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🍓</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Fraises de Saison</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">4,50€/kg</div>
+                        </div>
+                        <p class="product-description">Fraises juteuses et parfumées, fraîchement cueillies</p>
+                        <a href="recettes.html?produit=fraises" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🥒</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Concombres</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div class="product-price">1,80€/kg</div>
+                        </div>
+                        <p class="product-description">Concombres croquants et rafraîchissants, parfaits pour les salades</p>
+                        <a href="recettes.html?produit=concombres" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍅</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Tomates Cœur de Bœuf</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">3,90€/kg</div>
+                        </div>
+                        <p class="product-description">Tomates charnues et savoureuses, gorgées de soleil</p>
+                        <a href="recettes.html?produit=tomates" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍑</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Pêches</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">3,50€/kg</div>
+                        </div>
+                        <p class="product-description">Pêches juteuses et sucrées, un délice pour l'été</p>
+                        <a href="recettes.html?produit=peches" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION FRUITS -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🍎</span>
+                <h2 class="category-title">Fruits</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🍌</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Bananes</h3>
+                                <span class="product-origin">🌍 Équateur</span>
+                            </div>
+                            <div class="product-price">1,90€/kg</div>
+                        </div>
+                        <p class="product-description">Bananes mûres à point, énergétiques et délicieuses</p>
+                        <a href="recettes.html?produit=bananes" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍇</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Raisins Blancs</h3>
+                                <span class="product-origin">🇮🇹 Italie</span>
+                            </div>
+                            <div class="product-price">3,20€/kg</div>
+                        </div>
+                        <p class="product-description">Raisins sucrés et croquants, sans pépins</p>
+                        <a href="recettes.html?produit=raisins" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍐</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Poires Williams</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">2,80€/kg</div>
+                        </div>
+                        <p class="product-description">Poires fondantes et juteuses, parfaites en dessert</p>
+                        <a href="recettes.html?produit=poires" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍉</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Pastèque</h3>
+                                <span class="product-origin">🇪🇸 Espagne</span>
+                            </div>
+                            <div class="product-price">0,99€/kg</div>
+                        </div>
+                        <p class="product-description">Pastèque rafraîchissante, idéale pour l'été</p>
+                        <a href="recettes.html?produit=pasteque" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍋</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Citrons</h3>
+                                <span class="product-origin">🇪🇸 Espagne</span>
+                            </div>
+                            <div class="product-price">2,50€/kg</div>
+                        </div>
+                        <p class="product-description">Citrons juteux et parfumés pour vos plats et boissons</p>
+                        <a href="recettes.html?produit=citrons" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🥝</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Kiwis</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">3,40€/kg</div>
+                        </div>
+                        <p class="product-description">Kiwis riches en vitamines, sucrés et acidulés</p>
+                        <a href="recettes.html?produit=kiwis" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION LÉGUMES -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🥕</span>
+                <h2 class="category-title">Légumes</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🥔</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Pommes de Terre</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div class="product-price">1,50€/kg</div>
+                        </div>
+                        <p class="product-description">Pommes de terre polyvalentes pour tous vos plats</p>
+                        <a href="recettes.html?produit=pommes-de-terre" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🧅</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Oignons Jaunes</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">1,70€/kg</div>
+                        </div>
+                        <p class="product-description">Oignons savoureux, base de nombreuses recettes</p>
+                        <a href="recettes.html?produit=oignons" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌶️</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Poivrons</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">2,90€/kg</div>
+                        </div>
+                        <p class="product-description">Poivrons colorés et croquants, pleins de vitamines</p>
+                        <a href="recettes.html?produit=poivrons" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🥦</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Brocolis</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">2,40€/kg</div>
+                        </div>
+                        <p class="product-description">Brocolis frais et croquants, riches en nutriments</p>
+                        <a href="recettes.html?produit=brocolis" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍆</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Aubergines</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">2,60€/kg</div>
+                        </div>
+                        <p class="product-description">Aubergines fraîches pour ratatouilles et gratins</p>
+                        <a href="recettes.html?produit=aubergines" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🫑</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Courgettes</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div class="product-price">2,20€/kg</div>
+                        </div>
+                        <p class="product-description">Courgettes tendres et légères, faciles à cuisiner</p>
+                        <a href="recettes.html?produit=courgettes" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION SALADES & HERBES -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🥬</span>
+                <h2 class="category-title">Salades & Herbes Fraîches</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🥬</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Laitue</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div class="product-price">1,20€/pièce</div>
+                        </div>
+                        <p class="product-description">Laitue croquante et fraîche du matin</p>
+                        <a href="recettes.html?produit=laitue" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🥗</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Mâche</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">2,80€/barquette</div>
+                        </div>
+                        <p class="product-description">Mâche tendre et douce, pleine de fer</p>
+                        <a href="recettes.html?produit=mache" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌿</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Persil</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div class="product-price">0,90€/botte</div>
+                        </div>
+                        <p class="product-description">Persil frais et aromatique pour relever vos plats</p>
+                        <a href="recettes.html?produit=persil" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌱</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Coriandre</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div class="product-price">1,20€/botte</div>
+                        </div>
+                        <p class="product-description">Coriandre fraîche au parfum unique</p>
+                        <a href="recettes.html?produit=coriandre" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌿</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Basilic</h3>
+                                <span class="product-origin">🇫🇷 Local</span>
+                            </div>
+                            <div class="product-price">1,50€/pot</div>
+                        </div>
+                        <p class="product-description">Basilic frais et parfumé, idéal avec les tomates</p>
+                        <a href="recettes.html?produit=basilic" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🥬</div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div>
+                                <h3>Roquette</h3>
+                                <span class="product-origin">🇫🇷 France</span>
+                            </div>
+                            <div class="product-price">2,50€/barquette</div>
+                        </div>
+                        <p class="product-description">Roquette piquante et savoureuse pour vos salades</p>
+                        <a href="recettes.html?produit=roquette" class="recipe-link">🍳 Idées recettes</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌿</div>
+                    <div class="product-info">
+                        <div class="product-header
